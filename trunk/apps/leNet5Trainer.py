@@ -70,6 +70,12 @@ if __name__ == '__main__' :
     from operator import mul
     rng = RandomState(int(time()))
 
+    if not os.path.isdir(options.data):
+        if not os.path.exists(options.data):
+            raise IOError('{0} does not exist'.format(options.data))
+        else:
+            raise ValueError('{0} is not a directory'.format(options.data))
+
     # NOTE: The pickleDataset will silently use previously created pickles if
     #       one exists (for efficiency). So watch out for stale pickles!
     train, test, labels = ingestImagery(filepath=options.data, shared=False,

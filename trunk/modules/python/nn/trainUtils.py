@@ -6,9 +6,10 @@ def renameBestNetwork(lastSave, bestNetwork, log=None) :
     if log is not None :
         log.info('Renaming Best Network to [' + bestNetwork + ']')
 
-    if os.path.exists(bestNetwork) :
-        os.remove(bestNetwork)
-    os.rename(lastSave, bestNetwork)
+    if lastSave != bestNetwork:
+        if os.path.exists(bestNetwork) :
+            os.remove(bestNetwork)
+        os.rename(lastSave, bestNetwork)
 
     return bestNetwork
 

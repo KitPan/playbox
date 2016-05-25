@@ -75,6 +75,10 @@ def ingestImagery(filepath, shared=False, batchSize=1,
     if os.path.isdir(filepath) :
         filepath = pickleDataset(filepath, batchSize=batchSize, log=log,
                                  chipFunc=chipFunc, **kwargs)
+        
+    elif not filepath.endswith('pkl.gz'):
+        raise ValueError(
+                'Please provide either a pkl.gz or a directory to pickle')
 
     # Load the dataset to memory
     train = readPickleZip(filepath, log)

@@ -130,8 +130,9 @@ def ingestImagery(filepath, shared=False, log=None, **kwargs) :
     # read the directory structure and pickle it up
     if os.path.isdir(filepath) :
         filepath = pickleDataset(filepath, log=log, **kwargs)
-    else:
-        raise ValueError('{0} is not a directory'.format(filepath))
+    elif not filepath.endswith('pkl.gz'):
+        raise ValueError(
+                'Please provide either a pkl.gz or a directory to pickle')
 
     # Load the dataset to memory
     train, test, labels = readPickleZip(filepath, log)

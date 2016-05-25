@@ -73,8 +73,9 @@ if __name__ == '__main__' :
     if not os.path.isdir(options.data):
         if not os.path.exists(options.data):
             raise IOError('{0} does not exist'.format(options.data))
-        else:
-            raise ValueError('{0} is not a directory'.format(options.data))
+        elif not options.data.endswith('pkl.gz'):
+            raise ValueError(
+                'Please provide either a pkl.gz or a directory to pickle')
 
     # NOTE: The pickleDataset will silently use previously created pickles if
     #       one exists (for efficiency). So watch out for stale pickles!
